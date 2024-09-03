@@ -1,16 +1,29 @@
-"use client"
+"use client";
 import Link from "next/link";
+import { useState, useEffect } from "react";
 import { PanelsTopLeft } from "lucide-react";
-
 import { cn } from "@/lib/utils";
 import { useStore } from "@/hooks/use-store";
 import { useSidebarToggle } from "@/hooks/use-sidebar-toggle";
 import { Button } from "@/components/ui/button";
 import { Menu } from "./menu";
 import { SidebarToggle } from "./sidebar-toggle";
+import { ButtonLoading } from "../loading/LoadingSpinner";
 
 export function Sidebar() {
   const sidebar = useStore(useSidebarToggle, (state) => state);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return <ButtonLoading />;
+  }
 
   if (!sidebar) return null;
 
