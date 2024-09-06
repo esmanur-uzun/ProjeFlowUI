@@ -1,8 +1,9 @@
+"use client"
 import React, { createContext, useContext, useState, ReactNode } from "react";
 
 type GlobalDataContextType = {
     isOpen: boolean;
-    setIsOpen: (isOpen: boolean) => void;
+    setIsOpen: () => void;
 }
 
 const defaultContextValues: GlobalDataContextType = {
@@ -21,7 +22,11 @@ type Props = {
 };
 
 export function DataProvider({ children }: Props) {
-    const [isOpen, setIsOpen] = useState<boolean>(defaultContextValues.isOpen);
+    const [isOpen, setIsOpenState] = useState<boolean>(defaultContextValues.isOpen);
+
+    const setIsOpen = () =>{
+        setIsOpenState(!isOpen)
+    }
 
     return (
         <DataContext.Provider value={{ isOpen, setIsOpen }}>
