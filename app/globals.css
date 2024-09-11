@@ -3,8 +3,4 @@
 @tailwind utilities;
 
 @layer base {
-    .border-rounded{
-        border-radius: 50px !important;
-       
-    }
 }

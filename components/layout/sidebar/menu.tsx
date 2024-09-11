@@ -99,7 +99,7 @@ export function Menu({ isOpen }: MenuProps) {
                           <TooltipTrigger asChild>
                             <Button
                               variant={active ? "secondary" : "ghost"}
-                              className="w-full justify-start h-10 mb-1"
+                              className="w-full  justify-start h-10 mb-1"
                               asChild
                             >
                               <Link href={href}>
@@ -130,7 +130,7 @@ export function Menu({ isOpen }: MenuProps) {
                       </TooltipProvider>
                     </div>
                   ) : (
-                    <div className="w-full" key={menuIndex}>
+                    <div className="w-full " key={menuIndex}>
                       <CollapseMenuButton
                         icon={Icon}
                         label={label}
@@ -150,7 +150,8 @@ export function Menu({ isOpen }: MenuProps) {
                   <Button
                     onClick={() => {}}
                     variant="outline"
-                    className="w-full justify-center h-10 mt-5"
+                    className="w-full border-slate-300 justify-center h-10 mb-5"
+                    style={{borderRadius:"10px !important"}}
                   >
                     <span className={cn(isOpen === false ? "" : "mr-4")}>
                       <LogOut size={18} />

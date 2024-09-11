@@ -13,9 +13,10 @@ export function SidebarToggle({ isOpen, setIsOpen }: SidebarToggleProps) {
     <div className="invisible   lg:visible absolute top-[12px] -right-[16px] z-20">
       <Button
         onClick={() => setIsOpen?.()}
-        className="border-rounded border-slate-300 w-8 h-8 bg-white "
+        className="border-slate-300 w-8 h-8 bg-white "
         variant="outline"
         size="icon"
+        style={{borderRadius:"10px !important"}}
       >
         <ChevronLeft
           className={cn(
