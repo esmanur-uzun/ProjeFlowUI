@@ -7,7 +7,7 @@ type GlobalDataContextType = {
 }
 
 const defaultContextValues: GlobalDataContextType = {
-    isOpen: false,
+    isOpen: true,
     setIsOpen: () => {},
 };
 
