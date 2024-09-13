@@ -16,7 +16,6 @@ export function SidebarToggle({ isOpen, setIsOpen }: SidebarToggleProps) {
         className="border-slate-300 w-8 h-8 bg-white "
         variant="outline"
         size="icon"
-        style={{borderRadius:"10px !important"}}
       >
         <ChevronLeft
           className={cn(
