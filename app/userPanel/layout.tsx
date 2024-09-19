@@ -1,5 +1,6 @@
 import React from "react";
 import { Sidebar } from "@/components/layout/sidebar/sidebar";
+import Menu from "@/components/layout/menubar/menubar";
 
 export default function UserPanelLayout({
   children,
@@ -8,7 +9,8 @@ export default function UserPanelLayout({
 }) {
   return (
     <div>
-      <Sidebar />
+     <Menu/>
+      {/* <Sidebar /> */}
       {children}
     </div>
   );
