@@ -17,11 +17,11 @@ import {
 
 const Menu = () => {
   return (
-    <div>
-      <Menubar className="flex justify-center">
+    <div >
+      <Menubar className=" justify-center lg:hidden ">
         <MenubarMenu>
           <MenubarTrigger>File</MenubarTrigger>
-          <MenubarContent>
+          <MenubarContent className="flex justify-center">
             <MenubarItem>
               New Tab <MenubarShortcut>⌘T</MenubarShortcut>
             </MenubarItem>

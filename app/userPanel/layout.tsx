@@ -9,8 +9,8 @@ export default function UserPanelLayout({
 }) {
   return (
     <div>
-     <Menu/>
-      {/* <Sidebar /> */}
+      <Menu/>
+      <Sidebar />
       {children}
     </div>
   );
