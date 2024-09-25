@@ -13,8 +13,11 @@ import { Label } from "@/components/ui/label";
 import { PieChartComponent } from "@/components/charts/pieChart";
 const page = () => {
   return (
-    <div className="grid grid-cols-5 gap-4">
-      <div className="col-span-3 justify-center mt-6 flex">
+    <div className="grid grid-cols-1 md:grid-cols-5  gap-4 ">
+      <div className="col-span-2 mt-6 order-1 md:order-2  ">
+        <PieChartComponent />
+      </div>
+      <div className="col-span-3 order-2 md:order-1 justify-center mt-6 flex">
         <Card className="w-full">
           <CardHeader>
             <CardTitle>Create project</CardTitle>
@@ -51,9 +54,6 @@ const page = () => {
             <Button>Deploy</Button>
           </CardFooter>
         </Card>
-      </div>
-      <div className="col-span-2 ">
-        <PieChartComponent />
       </div>
     </div>
   );

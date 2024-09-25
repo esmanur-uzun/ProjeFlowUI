@@ -22,7 +22,7 @@ import {
 export const description = "A donut chart with text";
 
 const chartData = [
-  { browser: "chrome", visitors: 275, fill: "var(--color-chrome)" },
+  { browser: "chrome", visitors: 275, fill: "#FF5733" },
   { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
   { browser: "firefox", visitors: 287, fill: "var(--color-firefox)" },
   { browser: "edge", visitors: 173, fill: "var(--color-edge)" },
@@ -72,10 +72,7 @@ export function PieChartComponent() {
           className="mx-auto aspect-square max-h-[250px]"
         >
           <PieChart>
-            <ChartTooltip
-              cursor={false}
-              content={<ChartTooltipContent hideLabel />}
-            />
+            
             <Pie
               data={chartData}
               dataKey="visitors"
