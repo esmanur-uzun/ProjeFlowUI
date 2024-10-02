@@ -3,7 +3,6 @@ import { formatDistanceToNow } from "date-fns"
 
 import { cn } from "@/lib/utils"
 import { Badge } from "@/components/ui/badge"
-import { Separator } from "@/components/ui/separator"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Mail } from "../data"
 import { useMail } from "../use-mail"
