@@ -6,9 +6,16 @@ import { Button } from "@/components/ui/button";
 import { Menu } from "./menu";
 import { SidebarToggle } from "./sidebar-toggle";
 import { useGlobalDataContext } from "@/context/globalDataContext";
+import axios from 'axios';
+import { useState } from "react";
+
 
 export function Sidebar() {
   const {isOpen,setIsOpen} = useGlobalDataContext()
+  const [menuList,setMenuList] = useState([])
+
+  
+
 
   return (
     <aside
