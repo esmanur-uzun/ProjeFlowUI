@@ -7,24 +7,11 @@ import { Menu } from "./menu";
 import { SidebarToggle } from "./sidebar-toggle";
 import { useGlobalDataContext } from "@/context/globalDataContext";
 import { useEffect, useState } from "react";
-import ApiService from "@/hooks/serviceGetWays";
 
 export function Sidebar() {
   const { isOpen, setIsOpen } = useGlobalDataContext();
-  const apiService = new ApiService();
-  const [menuList, setMenuList] = useState([]);
-
-  useEffect(()=>{
-    getMenu()
-  },[])
-
-  const getMenu = () => {
-    apiService
-      .get("/configs/menuList")
-      .then((data) => console.log(data))
-      .catch((error) => console.log(error));
-  };
-
+  
+ 
   return (
     <aside
       className={cn(
