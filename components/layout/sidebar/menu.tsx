@@ -14,22 +14,23 @@ import {
 } from "@/components/ui/tooltip";
 import ApiService from "@/hooks/serviceGetWays";
 import { useState, useEffect } from "react";
-
+import Image from "next/image";
 interface MenuProps {
   isOpen: boolean | undefined;
 }
 
 export function Menu({ isOpen }: MenuProps) {
   const apiService = new ApiService();
-  const [menuList, setMenuList] = useState([])
-  const pathname = usePathname();
+  const [menuList, setMenuList] = useState([]);
+  // const pathname = usePathname();
 
   useEffect(() => {
     const getMenu = () => {
       apiService
         .get("/configs/menuList")
         .then(({ data }) => {
-          setMenuList(data[0].menu);
+          setMenuList(data.menu);
+          console.log(data.menu);
         })
         .catch((error) => console.log(error));
     };
@@ -40,7 +41,7 @@ export function Menu({ isOpen }: MenuProps) {
     <ScrollArea className="[&>div>div[style]]:!block">
       <nav className="mt-8 h-full w-full">
         <ul className="flex flex-col items-start space-y-1 px-2">
-          {menuList.map(({ title, icon: Icon }, index) => (
+          {menuList.map(({ title, icon }, index) => (
             <li className="w-full" key={index}>
               <TooltipProvider disableHoverableContent>
                 <Tooltip delayDuration={100}>
@@ -52,7 +53,12 @@ export function Menu({ isOpen }: MenuProps) {
                     >
                       <Link href="#">
                         <span className={cn(isOpen === false ? "" : "mr-4")}>
-                          <Icon size={18} />
+                          <Image
+                            src={`http://localhost:5000${icon}`}
+                            width={25}
+                            height={25}
+                            alt="menu icon"
+                          />
                         </span>
                         <p
                           className={cn(
@@ -74,35 +80,35 @@ export function Menu({ isOpen }: MenuProps) {
               </TooltipProvider>
             </li>
           ))}
-          <li className="w-full grow flex items-end">
-            <TooltipProvider disableHoverableContent>
-              <Tooltip delayDuration={100}>
-                <TooltipTrigger asChild>
-                  <Button
-                    onClick={() => {}}
-                    variant="outline"
-                    className="w-full border-slate-300 justify-center h-10 mb-5"
-                  >
-                    <span className={cn(isOpen === false ? "" : "mr-4")}>
-                      <LogOut size={18} />
-                    </span>
-                    <p
-                      className={cn(
-                        "whitespace-nowrap",
-                        isOpen === false ? "opacity-0 hidden" : "opacity-100"
-                      )}
-                    >
-                      Çıkış Yap
-                    </p>
-                  </Button>
-                </TooltipTrigger>
-                {isOpen === false && (
-                  <TooltipContent side="right">Çıkış Yap</TooltipContent>
-                )}
-              </Tooltip>
-            </TooltipProvider>
-          </li>
         </ul>
+        <div className="w-full grow flex items-end">
+          <TooltipProvider disableHoverableContent>
+            <Tooltip delayDuration={100}>
+              <TooltipTrigger asChild>
+                <Button
+                  onClick={() => {}}
+                  variant="outline"
+                  className="w-full border-slate-300 justify-center h-10 mb-5"
+                >
+                  <span className={cn(isOpen === false ? "" : "mr-4")}>
+                    <LogOut size={18} />
+                  </span>
+                  <p
+                    className={cn(
+                      "whitespace-nowrap",
+                      isOpen === false ? "opacity-0 hidden" : "opacity-100"
+                    )}
+                  >
+                    Çıkış Yap
+                  </p>
+                </Button>
+              </TooltipTrigger>
+              {isOpen === false && (
+                <TooltipContent side="right">Çıkış Yap</TooltipContent>
+              )}
+            </Tooltip>
+          </TooltipProvider>
+        </div>
       </nav>
     </ScrollArea>
   );
