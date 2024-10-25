@@ -1,8 +1,5 @@
-"use client";
-
-import Link from "next/link";
 import { LogOut } from "lucide-react";
-import { usePathname } from "next/navigation";
+import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -15,6 +12,7 @@ import {
 import ApiService from "@/hooks/serviceGetWays";
 import { useState, useEffect } from "react";
 import Image from "next/image";
+
 interface MenuProps {
   isOpen: boolean | undefined;
 }
@@ -22,7 +20,6 @@ interface MenuProps {
 export function Menu({ isOpen }: MenuProps) {
   const apiService = new ApiService();
   const [menuList, setMenuList] = useState([]);
-  // const pathname = usePathname();
 
   useEffect(() => {
     const getMenu = () => {
@@ -30,7 +27,6 @@ export function Menu({ isOpen }: MenuProps) {
         .get("/configs/menuList")
         .then(({ data }) => {
           setMenuList(data.menu);
-          console.log(data.menu);
         })
         .catch((error) => console.log(error));
     };
@@ -38,11 +34,11 @@ export function Menu({ isOpen }: MenuProps) {
   }, []);
 
   return (
-    <ScrollArea className="[&>div>div[style]]:!block">
-      <nav className="mt-8 h-full w-full">
-        <ul className="flex flex-col items-start space-y-1 px-2">
+    <div className="flex flex-col h-full">
+      <ScrollArea className="[&>div>div[style]]:!block flex-grow px-2">
+        <ul className="flex flex-col space-y-1">
           {menuList.map(({ title, icon }, index) => (
-            <li className="w-full" key={index}>
+            <li className="w-full pt-4" key={index}>
               <TooltipProvider disableHoverableContent>
                 <Tooltip delayDuration={100}>
                   <TooltipTrigger asChild>
@@ -64,7 +60,7 @@ export function Menu({ isOpen }: MenuProps) {
                           className={cn(
                             "max-w-[200px] truncate",
                             isOpen === false
-                              ? "-translate-x-96 opacity-0"
+                              ? "-translate-x-96 opacity-0 hidden"
                               : "translate-x-0 opacity-100"
                           )}
                         >
@@ -81,35 +77,36 @@ export function Menu({ isOpen }: MenuProps) {
             </li>
           ))}
         </ul>
-        <div className="w-full grow flex items-end">
-          <TooltipProvider disableHoverableContent>
-            <Tooltip delayDuration={100}>
-              <TooltipTrigger asChild>
-                <Button
-                  onClick={() => {}}
-                  variant="outline"
-                  className="w-full border-slate-300 justify-center h-10 mb-5"
+      </ScrollArea>
+
+      <div className="px-2 mt-auto">
+        <TooltipProvider disableHoverableContent>
+          <Tooltip delayDuration={100}>
+            <TooltipTrigger asChild>
+              <Button
+                onClick={() => {}}
+                variant="outline"
+                className="w-full border-slate-300 justify-center h-10 mb-5"
+              >
+                <span className={cn(isOpen === false ? "" : "mr-4")}>
+                  <LogOut size={18} />
+                </span>
+                <p
+                  className={cn(
+                    "whitespace-nowrap",
+                    isOpen === false ? "opacity-0 hidden" : "opacity-100"
+                  )}
                 >
-                  <span className={cn(isOpen === false ? "" : "mr-4")}>
-                    <LogOut size={18} />
-                  </span>
-                  <p
-                    className={cn(
-                      "whitespace-nowrap",
-                      isOpen === false ? "opacity-0 hidden" : "opacity-100"
-                    )}
-                  >
-                    Çıkış Yap
-                  </p>
-                </Button>
-              </TooltipTrigger>
-              {isOpen === false && (
-                <TooltipContent side="right">Çıkış Yap</TooltipContent>
-              )}
-            </Tooltip>
-          </TooltipProvider>
-        </div>
-      </nav>
-    </ScrollArea>
+                  Çıkış Yap
+                </p>
+              </Button>
+            </TooltipTrigger>
+            {isOpen === false && (
+              <TooltipContent side="right">Çıkış Yap</TooltipContent>
+            )}
+          </Tooltip>
+        </TooltipProvider>
+      </div>
+    </div>
   );
 }
