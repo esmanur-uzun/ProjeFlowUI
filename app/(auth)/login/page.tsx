@@ -10,12 +10,27 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import ApiService from "@/hooks/serviceGetWays";
 import loginImg from "../../public/login-img.jpg";
-
+import {setCookie} from "cookies-next"
 const Login = () => {
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+  const apiService = new ApiService();
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();    
+    apiService
+      .post("/login", { userName, password })
+      .then((data) => {
+        setCookie("accessToken", data.token)
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
-    <div className="bg-slate-100 flex min-h-screen flex-col items-center justify-between p-48">
+    <div className="bg-slate-100 flex items-center justify-center min-h-screen p-4 overflow-y-hidden">
       <Card className="w-[350px] bg-white">
         <div className="justify-center items-center border-b-2 flex">
           <Image src={loginImg} width={150} height={150} alt="" />
@@ -27,8 +42,23 @@ const Login = () => {
           <form>
             <div className="grid w-full items-center gap-4">
               <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="name">User Name</Label>
-                <Input id="name" placeholder="User name..." />
+                <Input
+                  id="name"
+                  value={userName}
+                  onChange={(e) => setUserName(e.target.value)}
+                  placeholder="Kullanıcı Adı"
+                />
+              </div>
+            </div>
+            <div className="grid w-full items-center mt-4 gap-4">
+              <div className="flex flex-col space-y-1.5">
+                <Input
+                  type="password"
+                  id="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Şifre"
+                />
               </div>
             </div>
           </form>
@@ -39,8 +69,8 @@ const Login = () => {
           </div>
         </CardContent>
         <CardFooter className="flex justify-end">
-          <Button className="bg-red-600 text-slate-50" variant="outline">
-            Sign in
+          <Button onClick={handleSubmit} className="bg-red-600 text-slate-50" variant="outline">
+            Giriş Yap
           </Button>
         </CardFooter>
       </Card>

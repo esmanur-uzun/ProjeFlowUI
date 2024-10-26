@@ -12,7 +12,7 @@ export function middleware(request:NextRequest){
     
       if (isAuthenticated && isAuthPage) {
         console.log("Redirecting to /");
-        return NextResponse.redirect(new URL("/", request.url));
+        return NextResponse.redirect(new URL("/userPanel", request.url));
       }
 
       return NextResponse.next();
