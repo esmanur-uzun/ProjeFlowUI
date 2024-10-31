@@ -1,3 +1,4 @@
+
 import { LogOut } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
@@ -12,6 +13,9 @@ import {
 import ApiService from "@/hooks/serviceGetWays";
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import { deleteCookie } from "cookies-next";
+import { useRouter } from "next/navigation";
+
 
 interface MenuProps {
   isOpen: boolean | undefined;
@@ -20,6 +24,7 @@ interface MenuProps {
 export function Menu({ isOpen }: MenuProps) {
   const apiService = new ApiService();
   const [menuList, setMenuList] = useState([]);
+  const router = useRouter()
 
   useEffect(() => {
     const getMenu = () => {
@@ -32,6 +37,11 @@ export function Menu({ isOpen }: MenuProps) {
     };
     getMenu();
   }, []);
+
+  const logOut = ()=>{
+    deleteCookie("accessToken")
+    router.push("/login")
+  }
 
   return (
     <div className="flex flex-col h-full">
@@ -84,7 +94,7 @@ export function Menu({ isOpen }: MenuProps) {
           <Tooltip delayDuration={100}>
             <TooltipTrigger asChild>
               <Button
-                onClick={() => {}}
+                onClick={logOut}
                 variant="outline"
                 className="w-full border-slate-300 justify-center h-10 mb-5"
               >
