@@ -12,8 +12,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { PieChartComponent } from "@/components/charts/pieChart";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import Incomplete from "@/components/layout/todos/incomplete";
-import Completed from "@/components/layout/todos/completed";
+import Incomplete from "@/components/todos/incomplete";
+import Completed from "@/components/todos/completed";
 const page = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-5 gap-4 ">
